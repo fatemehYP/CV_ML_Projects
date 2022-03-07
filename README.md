@@ -28,14 +28,14 @@ Motion estimation using optical flow.
   This is done using Lucas Kanade algorithm. 
 
 Result:
-nnndnd
+
 ![Example screenshot](results/res12.png)
 
-### facial_landmark_detection.py
+## facial_landmark_detection.py
 
 Landmark detection is a two step process:
 
-- Step1. Face Detection:
+- Step1. **Face Detection**:
   
   For best results we should use the same face detector used in training the landmark detector.
   
@@ -43,7 +43,7 @@ Landmark detection is a two step process:
   
   (Dlib’s face detector is based on Histogram of Oriented Gradients features and Support Vector Machines (SVM))
 
-- Step2. Landmark detection
+- Step2. **Landmark detection**
   
   The landmark detector finds the landmark points inside the face rectangle.
   
@@ -54,10 +54,11 @@ Landmark detection is a two step process:
   - Face rectangle
 
   The output landmarks are stored in an instance of the class full_object_detection.
+  
   A few important methods of full_object_detection are listed below
-  - num_parts() : Number of landmark points.
-  - part(i) : The ith landmark point
-  - part(i).x() and part(i).y() can be used to access the x and y coordinates of the ith landmark point.
+  - **num_parts()** : Number of landmark points.
+  - **part(i)** : The ith landmark point
+  - **part(i).x()** and **part(i).y()** can be used to access the x and y coordinates of the ith landmark point.
 
 Result:
 This script detects facial landmarks and plot them on a face image.
