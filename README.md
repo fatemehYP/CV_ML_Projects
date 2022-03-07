@@ -2,8 +2,8 @@
 This folder contains different AI applications. List of these applications can be seen in the table of contents.
 ## Table of Contents
 * [facial_landmark_detection.py](#facial_landmark_detection)
-* [face_smile_detection.py](#face_smile_detection.py)
-* [optical_flow_tracker.py](#optical_flow_tracker.py)
+* [face_smile_detection.py](#face_smile_detection)
+* [optical_flow_tracker.py](#optical_flow_tracker)
 
 [comment]: <> (* [Screenshots]&#40;#screenshots&#41;)
 
@@ -54,7 +54,7 @@ This script detects facial landmarks and plot them on a face image.
 
 ![Example screenshot](results/Facial%20Landmark%20detector.jpg)
 
-## face_smile_detection.py
+## face_smile_detection
 Object Detection using Haar Cascades.
 
 This script uses haar cascade for detecting face and smile in an image. The trained model for face detection and smile detection is downloaded from this link:
@@ -66,7 +66,7 @@ The main function used in the script is **detectMultiscale**.
 Result:
 ![Example screenshot](results/face_smile_detection.png)
 
-## optical_flow_tracker.py
+## optical_flow_tracker
 Motion estimation using optical flow.
 - Step1: **Detect Corners for tracking them**
   
