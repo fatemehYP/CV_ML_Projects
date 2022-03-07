@@ -50,7 +50,8 @@ This script detects facial landmarks and plot them on a face image.
 ## face_smile_detection.py
 Object Detection using Haar Cascades.
 
-This script uses haar cascade for detecting face and smile in an image.The trained model for face detection and smile detection is downloaded from this link:
+This script uses haar cascade for detecting face and smile in an image. The trained model for face detection and smile detection is downloaded from this link:
+
 [https://github.com/opencv/opencv/tree/master/data/haarcascades]
 
 The main function used in the script is **detectMultiscale**.
@@ -76,7 +77,3 @@ Result:
 
 ![Example screenshot](results/)
 
-
-
-
-[]: https://github.com/opencv/opencv/tree/master/data/haarcascades
