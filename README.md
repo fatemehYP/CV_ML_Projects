@@ -82,5 +82,5 @@ Motion estimation using optical flow.
 
 Result:
 
-![Example screenshot](results/)
+![Example screenshot](results/optical_flow_tracker.png)
 
