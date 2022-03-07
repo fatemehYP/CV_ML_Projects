@@ -1,9 +1,9 @@
-# Computer Vision Projects
+# Computer Vision and Machine Learning Projects
 This folder contains different AI applications. List of these applications can be seen in the table of contents.
 ## Table of Contents
-* [optical_flow_tracker.py](#optical_flow_tracker.py)
 * [facial_landmark_detection.py](#facial_landmark_detection.py)
-* [Features](#features)
+* [face_smile_detection.py](#face_smile_detection.py)
+* [optical_flow_tracker.py](#optical_flow_tracker.py)
 * [Screenshots](#screenshots)
 * [Setup](#setup)
 * [Usage](#usage)
@@ -12,24 +12,6 @@ This folder contains different AI applications. List of these applications can b
 * [Acknowledgements](#acknowledgements)
 * [Contact](#contact)
 <!-- * [License](#license) -->
-
-## optical_flow_tracker.py
-Motion estimation using optical flow.
-- Step1: Detect Corners for tracking them
-  
-  Using the Shi Tomasi corner detection algorithm to find some points which will be tracked over the video.
-  
-  It is implemented in OpenCV using the function goodFeaturesToTrack.
-
-- Step2: Set up the Lucas Kanade Tracker
-  
-  After detecting certain points in the first frame, they will be tracked in the next frame.
-  
-  This is done using Lucas Kanade algorithm. 
-
-Result:
-
-![Example screenshot](results/res12.png)
 
 ## facial_landmark_detection.py
 
@@ -65,5 +47,36 @@ This script detects facial landmarks and plot them on a face image.
 
 ![Example screenshot](results/Facial%20Landmark%20detector.jpg)
 
+## face_smile_detection.py
+Object Detection using Haar Cascades.
+
+This script uses haar cascade for detecting face and smile in an image.The trained model for face detection and smile detection is downloaded from this link:
+[https://github.com/opencv/opencv/tree/master/data/haarcascades]
+
+The main function used in the script is **detectMultiscale**.
+
+Result:
+![Example screenshot](results/face_smile_detection.png)
+
+## optical_flow_tracker.py
+Motion estimation using optical flow.
+- Step1: **Detect Corners for tracking them**
+  
+  Using the Shi Tomasi corner detection algorithm to find some points which will be tracked over the video.
+  
+  It is implemented in OpenCV using the function **goodFeaturesToTrack**.
+
+- Step2: **Set up the Lucas Kanade Tracker**
+  
+  After detecting certain points in the first frame, they will be tracked in the next frame.
+  
+  This is done using Lucas Kanade algorithm. 
+
+Result:
+
+![Example screenshot](results/)
 
 
+
+
+[]: https://github.com/opencv/opencv/tree/master/data/haarcascades
