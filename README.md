@@ -4,13 +4,20 @@ This folder contains different AI applications. List of these applications can b
 * [facial_landmark_detection.py](#facial_landmark_detection.py)
 * [face_smile_detection.py](#face_smile_detection.py)
 * [optical_flow_tracker.py](#optical_flow_tracker.py)
-* [Screenshots](#screenshots)
-* [Setup](#setup)
-* [Usage](#usage)
-* [Project Status](#project-status)
-* [Room for Improvement](#room-for-improvement)
-* [Acknowledgements](#acknowledgements)
-* [Contact](#contact)
+
+[comment]: <> (* [Screenshots]&#40;#screenshots&#41;)
+
+[comment]: <> (* [Setup]&#40;#setup&#41;)
+
+[comment]: <> (* [Usage]&#40;#usage&#41;)
+
+[comment]: <> (* [Project Status]&#40;#project-status&#41;)
+
+[comment]: <> (* [Room for Improvement]&#40;#room-for-improvement&#41;)
+
+[comment]: <> (* [Acknowledgements]&#40;#acknowledgements&#41;)
+
+[comment]: <> (* [Contact]&#40;#contact&#41;)
 <!-- * [License](#license) -->
 
 ## facial_landmark_detection.py
