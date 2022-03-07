@@ -1,7 +1,7 @@
 # Computer Vision and Machine Learning Projects
 This folder contains different AI applications. List of these applications can be seen in the table of contents.
 ## Table of Contents
-* [facial_landmark_detection.py](#facial_landmark_detection.py)
+* [facial_landmark_detection.py](#facial_landmark_detection)
 * [face_smile_detection.py](#face_smile_detection.py)
 * [optical_flow_tracker.py](#optical_flow_tracker.py)
 
@@ -20,7 +20,7 @@ This folder contains different AI applications. List of these applications can b
 [comment]: <> (* [Contact]&#40;#contact&#41;)
 <!-- * [License](#license) -->
 
-## facial_landmark_detection.py
+## facial_landmark_detection
 
 Landmark detection is a two step process:
 
