@@ -1,83 +1,63 @@
 import cv2
-import matplotlib.pyplot as plt
 import numpy as np
 
 '''
-    Implementing a Multiobject Tracker class from OpenCV which has a very basic implementation.
-    It processes the tracked objects independently without any optimization across the tracked objects.
+    Motion estimation using optical flow.
+    Step1: Detect Corners for tracking them
+    Using the Shi Tomasi corner detection algorithm to find some points which will be tracked over the video.
+    It is implemented in OpenCV using the function goodFeaturesToTrack.
+    Step2: Set up the Lucas Kanade Tracker
+    After detecting certain points in the first frame, they will be tracked in the next frame.
+    This is done using Lucas Kanade algorithm.
 '''
 
-def choose_tracker(tracker_type):
-    if tracker_type == "Boosting":
-        tracker = cv2.TrackerBoosting_create()
-    elif tracker_type == "MIL":
-        tracker = cv2.TrackerMIL_create()
-    elif tracker_type == "KCF":
-        tracker = cv2.TrackerKCF_create()
-    elif tracker_type == "TLD":
-        tracker = cv2.TrackerTLD_create()
-    elif tracker_type == "MEDIANFLOW":
-        tracker = cv2.TrackerMedianFlow_create()
-    elif tracker_type == "GOTURN":
-        tracker = cv2.TrackerGOTURN_create()
-    elif tracker_type == "CSRT":
-        tracker = cv2.TrackerCSRT_create()
-    elif tracker_type == "MOSSE":
-        tracker = cv2.TrackerMOSSE_create()
-    else:
-        tracker = None
-        print('Incorrect tracker name')
-        print('available trackers are:')
-        for name in tracker_type:
-            print(name)
-    return tracker
+
+def feature_extractor():
+    param_track = dict(maxCorners=numCorners, qualityLevel=0.3, minDistance=7, blockSize=7)
+    points = cv2.goodFeaturesToTrack(gray_old_frame, mask=None, **param_track)
+    return points
 
 
-def initial_bbox():
-    global color
-    color = []
-    for i in range(3):
-        color.append((np.random.randint(0, 255), np.random.randint(0, 255), np.random.randint(0, 255)))
-    bboxes = [(471, 250, 66, 159), (349, 232, 69, 102)]
-    return bboxes
+def tracker(gray_old_frame, old_point):
+    param_flow = dict(winSize=(15, 15), maxLevel=2,
+                      criteria=(cv2.TERM_CRITERIA_EPS | cv2.TERM_CRITERIA_COUNT, 10, 0.03))
 
-
-def draw_bbox(frame, boxes):
-    for i, box in enumerate(boxes):
-        pt1 = (int(box[0]), int(box[1]))
-        pt2 = (int(box[0] + box[2]), int(box[1] + box[3]))
-        cv2.rectangle(frame, pt1, pt2, color[i], 4, cv2.LINE_AA)
-        result.write(frame)
-
-
-def track():
+    mask = np.zeros_like(old_frame)
+    color = np.random.randint(0, 255, (numCorners, 3))
+    count = 0
     while True:
-        success, frame = video.read()
-        if not success:
+        retval, frame = video.read()
+        if retval:
+            gray_frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+            count += 1
+            newPts, status, err = cv2.calcOpticalFlowPyrLK(gray_old_frame, gray_frame, old_point, None, **param_flow)
+            good_old = old_point[status == 1]
+            good_new = newPts[status == 1]
+
+            for i, (new, old) in enumerate(zip(good_new, good_old)):
+                a, b = new.ravel()
+                c, d = old.ravel()
+                cv2.line(mask, (int(a), int(b)), (int(c), int(d)), color[i].tolist(), 2, cv2.LINE_AA)
+                cv2.circle(frame, (int(a), int(b)), 3, color[i].tolist(), -1)
+            display_frame = cv2.add(frame, mask)
+            output.write(display_frame)
+            if count > 50:
+                break
+            gray_old_frame = gray_frame.copy()
+            old_point = good_new.reshape(-1, 1, 2)
+        else:
             break
-        ok, boxes = multitracker.update(frame)
-        draw_bbox(frame, boxes)
 
 
 if __name__ == "__main__":
-
-    tracker_type = ['Boosting', 'MIL', 'KCF', 'TLD', 'MEDIANFLOW', 'GOTURN', 'CSRT', 'MOSSE']
-    tracker_type = tracker_type[6]
-
-    video = cv2.VideoCapture('videos/cycle.mp4')
-    width = int(video.get(cv2.CAP_PROP_FRAME_WIDTH))
+    video = cv2.VideoCapture("videos/cycle.mp4")
     height = int(video.get(cv2.CAP_PROP_FRAME_HEIGHT))
-    fps = int(video.get(cv2.CAP_PROP_FPS))
-    result = cv2.VideoWriter('results/output_multiple_tracker.avi', cv2.VideoWriter_fourcc('M', 'J', 'P', 'G'), fps, (width, height))
+    width = int(video.get(cv2.CAP_PROP_FRAME_WIDTH))
+    output = cv2.VideoWriter('results/sparse-output.mp4', cv2.VideoWriter_fourcc(*'MP4V'), 20, (width, height))
 
-    success, frame = video.read()
-    if not success:
-        print('Cannot read video file')
-
-    multitracker = cv2.MultiTracker_create()
-
-    bboxes = initial_bbox()
-    for bbox in bboxes:
-        multitracker.add(choose_tracker(tracker_type), frame, bbox)
-
-    track()
+    # Take first frame and find corners in it
+    retval, old_frame = video.read()
+    gray_old_frame = cv2.cvtColor(old_frame, cv2.COLOR_BGR2GRAY)
+    numCorners = 100
+    old_point = feature_extractor()
+    tracker(gray_old_frame, old_point)
