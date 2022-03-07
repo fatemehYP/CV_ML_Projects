@@ -4,6 +4,7 @@ This folder contains different AI applications. List of these applications can b
 * [facial_landmark_detection.py](#facial_landmark_detection)
 * [face_smile_detection.py](#face_smile_detection)
 * [optical_flow_tracker.py](#optical_flow_tracker)
+* [pedestrian_detection.py](#pedestrian_detection)
 
 [comment]: <> (* [Screenshots]&#40;#screenshots&#41;)
 
@@ -84,3 +85,18 @@ Result:
 
 ![Example screenshot](results/optical_flow_tracker.png)
 
+## pedestrian_detection
+Using a HOG Descriptor + SVM classifier for Object Detection.
+
+Using INRIA’s Pedestrian dataset for training a people detector. Dataset contains two sub-folders:
+- train_64x128_H96 - contains the cropped images of pedestrians and resized to 64x128 ( Positive Examples )
+- test_64x128_H96 - contains cropped images which do not contain pedestrians. ( Negative Examples )
+  
+The training data can also be downloaded from this link:
+
+[https://www.filepicker.io/api/file/VQKdmzKqSLWruVhx7Xdd]
+
+Results: At the end we compare our model with OpenCV’s default People Detector.
+    (Green rectangles for results from our model and red boxes for results from OpenCV’s people detector.)
+
+![Example screenshot](results/pedestrian_detection.png)
