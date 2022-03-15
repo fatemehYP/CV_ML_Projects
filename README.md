@@ -5,6 +5,7 @@ This folder contains different AI applications. List of these applications can b
 * [face_smile_detection.py](#face_smile_detection)
 * [optical_flow_tracker.py](#optical_flow_tracker)
 * [pedestrian_detection.py](#pedestrian_detection)
+* [delaunay_voronoi.py](#delaunay_voronoi)
 
 [comment]: <> (* [Screenshots]&#40;#screenshots&#41;)
 
@@ -100,3 +101,6 @@ Results: At the end we compare our model with OpenCV’s default People Detector
     (Green rectangles for results from our model and red boxes for results from OpenCV’s people detector.)
 
 ![Example screenshot](results/pedestrian_detection.png)
+
+##delaunay_voronoi
+[Example screenshot](results/delaunay_voronoi.png)
