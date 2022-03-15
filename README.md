@@ -102,6 +102,6 @@ Results: At the end we compare our model with OpenCV’s default People Detector
 
 ![Example screenshot](results/pedestrian_detection.png)
 
-##delaunay_voronoi
+## delaunay_voronoi
 
 ![Example screenshot](results/delaunay_voronoi.png)
