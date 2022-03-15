@@ -6,7 +6,7 @@ This folder contains different AI applications. List of these applications can b
 * [optical_flow_tracker.py](#optical_flow_tracker)
 * [pedestrian_detection.py](#pedestrian_detection)
 * [delaunay_voronoi.py](#delaunay_voronoi)
-* [triabgle_warping.py](#triabgle_warping)
+* [triangle_warping.py](#triangle_warping)
 
 [comment]: <> (* [Screenshots]&#40;#screenshots&#41;)
 
@@ -107,6 +107,6 @@ Results: At the end we compare our model with OpenCV’s default People Detector
 
 ![Example screenshot](results/delaunay_voronoi.png)
 
-## triabgle_warping
+## triangle_warping
 
 ![Example screenshot](results/triangle_warping.png)
