@@ -158,6 +158,6 @@ The steps for generating an average face given a set of facial images is describ
   To calculate the average image, we can simply add the pixel intensities of all warped images and divide by the
   number of images.
 
-Results:
+Results: The image below shows the average of my and my friends' faces.
 
 ![Example screenshot](results/face_averaging.png)
