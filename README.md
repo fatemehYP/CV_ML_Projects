@@ -7,6 +7,7 @@ This folder contains different AI applications. List of these applications can b
 * [pedestrian_detection.py](#pedestrian_detection)
 * [delaunay_voronoi.py](#delaunay_voronoi)
 * [triangle_warping.py](#triangle_warping)
+* [face_averaging.py](#face_averaging)
 
 [comment]: <> (* [Screenshots]&#40;#screenshots&#41;)
 
@@ -110,3 +111,53 @@ Results: At the end we compare our model with OpenCV’s default People Detector
 ## triangle_warping
 
 ![Example screenshot](results/triangle_warping.png)
+
+## face_averaging
+
+**Creating an average face (combination of faces) using OpenCV.**
+
+The steps for generating an average face given a set of facial images is described below:
+
+- **Step 1 : Facial Feature Detection**
+
+  For each facial image we calculate 68 facial landmarks using Dlib.
+  (details of landmark detection is described in **facial_landmark_detection.py**)
+- **Step 2 : Coordinate Transformation**
+
+  The input facial images can be of very different sizes. So we need a way to normalize
+  the faces and bring them to the same reference frame. We can use **estimateAffinePartial2D** function
+  to find the similarity transform and convert the input image of size
+  (m,n) to output image coordinates of size (m'×n').
+  Once a similarity transform is calculated, it can be used to transform the input image and 
+  the landmarks to the output coordinates. The image is transformed using **warpAffine** and 
+  the points are transformed using the transform function.
+  (We chose the corners of the eyes to be at ( 0.3 x width, height / 3 ) and ( 0.7 x width , height / 3 ).
+  OpenCV requires you to supply at least 3 point pairs. We can simply hallucinate a third point such that it forms
+  an equilateral triangle with the two known points).
+- **Step 3 : Face Alignment**
+  
+  Next, we use a trick to align all the facial features. We will use 68 points to divide the images into
+  triangular regions and align these regions before averaging pixel values.
+  
+  - **Calculate Mean Face Points**
+  
+    To calculate the average face where the features are aligned, we first need to calculate the average of all
+    transformed landmarks in the output image coordinates. This is done by simply averaging the x and y values of
+    the landmarks in the output image coordinates.
+  - **Calculate Delaunay Triangulation**
+    
+    We can use these 68 points, and 8 points on the boundary of the output image to calculate a Delaunay Triangulation.
+    (to calculate a Delaunay Triangulation refer to **delaunay_voronoi.py**)
+    
+  - **Warp Triangles**
+  
+    The collection of triangles in the input image is warped to the corresponding triangle in the output image.
+    (for details about warp triangles refer to **triangle_warping.py**)
+- **Step 4 : Face Averaging**
+
+  To calculate the average image, we can simply add the pixel intensities of all warped images and divide by the
+  number of images.
+
+Results:
+
+![Example screenshot](results/face_averaging.png)
